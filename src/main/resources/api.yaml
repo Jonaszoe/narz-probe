@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  title: Arithmetic Operations API
+  version: 1.0.0
+  description: A secure API for basic arithmetic operations
+paths:
+  /arithmetic/add:
+    post:
+      security:
+        - basicAuth: []
+      tags:
+        - Arithmetic
+      summary: Add two numbers
+      operationId: add
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperationRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /arithmetic/subtract:
+    post:
+      security:
+        - basicAuth: []
+      tags:
+        - Arithmetic
+      summary: Subtract two numbers
+      operationId: subtract
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperationRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /arithmetic/multiply:
+    post:
+      security:
+        - basicAuth: []
+      tags:
+        - Arithmetic
+      summary: Multiply two numbers
+      operationId: multiply
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperationRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /arithmetic/divide:
+    post:
+      security:
+        - basicAuth: []
+      tags:
+        - Arithmetic
+      summary: Divide two numbers
+      operationId: divide
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperationRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DivOperationResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '400':
+          description: Division by zero error
+components:
+  schemas:
+    OperationRequest:
+      type: object
+      properties:
+        firstNumber:
+          type: integer
+          description: First operand
+        secondNumber:
+          type: integer
+          description: Second operand
+      required:
+        - firstNumber
+        - secondNumber
+    OperationResponse:
+      type: object
+      properties:
+        result:
+          type: integer
+          description: Result of the operation
+      $ref: '#/components/schemas/OperationResponse'
+    DivOperationResponse:
+      type: object
+      properties:
+        result:
+          type: BigDecimal
+          description: Result of the division operation
+      $ref: '#/components/schemas/DivOperationResponse'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
